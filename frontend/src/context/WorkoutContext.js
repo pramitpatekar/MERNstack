@@ -8,10 +8,12 @@ export const workoutsReducer = (state, action) => {
             return{
                 workouts: action.payload
             }
-        case 'CREATE_WORKOUT'
-            return {
+        case 'CREATE_WORKOUT':
+            return{
                 workouts: [action.payload, ...state.workouts]
             }
+        default:
+            return state
 
     }
 }
@@ -21,10 +23,10 @@ export const WorkoutsContextProvider = ({children}) => {
         workouts: null
     })
 
-    dispatch({type: 'SET_WORKOUTS', payload: [{}, {}]})
+//    dispatch({type: 'SET_WORKOUTS', payload: [{}, {}]})
 
     return (
-        <WorkoutsContext.Provider>
+        <WorkoutsContext.Provider value={{...state, dispatch}}>
             { children }
         </WorkoutsContext.Provider>
     )
